@@ -26,7 +26,7 @@ A modern, secure temporary email service built with Next.js and TypeScript. Gene
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/yourusername/krypticmail.git
+git clone https://github.com/AKhilRaghav0/krypticMail.git
 cd krypticmail
 ```
 
