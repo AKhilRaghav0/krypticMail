@@ -17,8 +17,9 @@ A modern, secure temporary email service built with Next.js and TypeScript. Gene
 ## 🚀 Tech Stack
 
 - **Frontend**: Next.js 14, React, TypeScript, TailwindCSS
-- **Backend**: Node.js, SMTP Server
+- **Backend**: Node.js, SMTP Server, GraphQL API
 - **Database**: PostgreSQL with Prisma ORM
+- **API**: GraphQL with Apollo Client
 - **Styling**: Tailwind CSS with custom animations
 - **Icons**: Heroicons
 
@@ -108,3 +109,79 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Tailwind CSS](https://tailwindcss.com/)
 - [Heroicons](https://heroicons.com/)
 - [Prisma](https://www.prisma.io/)
+
+## 📡 GraphQL API
+
+KrypticMail uses GraphQL for efficient data fetching and real-time updates. The GraphQL endpoint is available at `/api/graphql`.
+
+### Example Queries
+
+1. **Generate Email**
+```graphql
+mutation {
+  generateEmail {
+    email
+    expiresAt
+  }
+}
+```
+
+2. **Check Email Status**
+```graphql
+query {
+  tempEmail(email: "your-email@krypticbit.io") {
+    email
+    expiresAt
+    messages {
+      subject
+      from
+      content
+    }
+  }
+}
+```
+
+3. **Subscribe to New Messages**
+```graphql
+subscription {
+  newMessage(email: "your-email@krypticbit.io") {
+    from
+    subject
+    content
+    receivedAt
+  }
+}
+```
+
+### Using GraphQL in Development
+
+1. Access GraphQL Playground at `http://localhost:3000/api/graphql`
+2. Use Apollo Client in your components:
+```typescript
+import { useQuery, gql } from '@apollo/client';
+
+const GET_MESSAGES = gql`
+  query GetMessages($email: String!) {
+    messages(email: $email) {
+      from
+      subject
+      content
+    }
+  }
+`;
+
+function Messages({ email }) {
+  const { loading, data } = useQuery(GET_MESSAGES, {
+    variables: { email }
+  });
+
+  if (loading) return <div>Loading...</div>;
+  return (
+    <div>
+      {data.messages.map(message => (
+        <MessageCard key={message.id} message={message} />
+      ))}
+    </div>
+  );
+}
+```
