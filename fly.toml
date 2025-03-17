@@ -1,0 +1,17 @@
+app = "krypticmail-smtp"
+primary_region = "dfw"
+
+[build]
+  builder = "heroku/buildpacks:20"
+
+[env]
+  PORT = "2525"
+  HOST = "0.0.0.0"
+  API_URL = "https://your-vercel-app.vercel.app"
+
+[[services]]
+  internal_port = 2525
+  protocol = "tcp"
+
+  [[services.ports]]
+    port = 2525 

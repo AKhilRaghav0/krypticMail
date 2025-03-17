@@ -2,26 +2,48 @@
   "name": "krypticmail",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "email-server": "NODE_OPTIONS='--loader ts-node/esm' ts-node --project tsconfig.server.json src/email-server.ts",
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.0",
+    "@heroicons/react": "^2.2.0",
+    "@prisma/client": "^6.5.0",
+    "@vercel/postgres": "^0.10.0",
+    "bcryptjs": "^3.0.2",
+    "imap-simple": "^5.1.0",
+    "mailparser": "^3.6.5",
+    "next": "15.2.2",
+    "node-fetch": "^3.3.2",
+    "nodemailer": "^6.10.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "next": "15.2.2"
+    "react-hot-toast": "^2.5.2",
+    "react-markdown": "^10.1.0",
+    "remark-gfm": "^4.0.1",
+    "smtp-server": "^3.13.2"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/mailparser": "^3.4.4",
     "@types/node": "^20",
+    "@types/node-fetch": "^2.6.11",
+    "@types/nodemailer": "^6.4.17",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4",
+    "@types/smtp-server": "^3.5.10",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
-    "@eslint/eslintrc": "^3"
+    "prisma": "^6.5.0",
+    "tailwindcss": "^4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5"
   }
 }
